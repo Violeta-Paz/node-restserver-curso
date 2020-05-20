@@ -1,10 +1,11 @@
+
+
 const Jwt = require('jsonwebtoken');
 
 
-// ================
-// verificar Token
-// ================
-
+// =====================
+// Verificar Token
+// =====================
 let verificaToken = (req, res, next) => {
 
     let token = req.get('token');
@@ -12,21 +13,21 @@ let verificaToken = (req, res, next) => {
     Jwt.verify(token, process.env.SEED, (err, decoded) => {
 
         if (err) {
-            return res.status(401).Json({
+            return res.status(401).json({
                 ok: false,
                 err: {
-                    message: 'toquen no valido'
+                    message: 'Token no válido'
                 }
             });
         }
+
         req.usuario = decoded.usuario;
         next();
 
     });
 
-
-
 };
+
 
 // ===================
 // verifica adminRole
